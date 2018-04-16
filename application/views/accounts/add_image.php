@@ -43,26 +43,23 @@
 			<div id="h1" class="red"><?php echo $this->session->flashdata('nof');?></div>
 			<div id="h1" class="red"><?php echo $this->session->flashdata('chmod');?></div>
           </div>
-			    <div style="margin:0 auto; width:400px;">
+			 <div style="margin:0 auto; width:400px;">
                 <table height="150" width="400">
                 	<tr>
-                    	<td width="100" height="100">Upload Image</td>
-                        <td width="300">
-                        <form action="<?=site_url();?>user_upload_file" method="post" enctype="multipart/form-data">
-							<input type="file" name="userfile" id="file" required>
+                    	<td width="100" height="100">Choose Image</td><br/><br/>
+                        <td width="400">
+                        <form action="<?=site_url();?>skip_upload/index/<?php foreach($row as $data) $id=$data['id'];  echo $id;?>" method="post" enctype="multipart/form-data">
+							<input type="file" name="userfile" id="file">
                             <input type="hidden" name="page" value="1" >
 							<input type = "hidden" name = "tit" value = "<?php foreach($row as $data) $tit=$data['tit'];  echo $tit; ?>" >
                             <input type="hidden" name="id" value="<?php foreach($row as $data) $id=$data['id'];  echo $id; ?>" >
-                            <input type="submit" value="upload">
+                            <input type="submit" id="fandup" value="Finish">
                          </form>
                        </td>
                    </tr>
-                   <tr><td colspan="2">Note: Only .jpg files are allowed to upload (Max 10Mb)</td></tr>
+                   <tr><td colspan="2" style="color:red">Note: Only .jpg files are allowed to upload (Max 10Mb)</td></tr>
                    <tr><td colspan="2"></td></tr>
-                   
-                   <tr><td colspan="2" height="50">To skip this step click finish button</td></tr>
                    <tr>
-                   <td><form action="<?=site_url();?>skip_upload/index/<?php foreach($row as $data) $id=$data['id'];  echo $id;?>" method="post"><input type="submit" value="Finish"/></form></td></tr>
                   </table>
                   
              </div>
