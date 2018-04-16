@@ -1,0 +1,237 @@
+@charset "utf-8";
+/* Edal BPP CSS Document */
+
+#header_p{
+	height:70px;
+	margin:0 auto;
+	padding-top:10px;
+}
+#header_p  a{
+	text-decoration:none;
+	font-size:40px;
+	cursor:pointer;
+	list-style:none;
+}
+#header_p .logo{
+	width:403px;
+	height:33px;
+	padding-left:30px;
+}
+
+#header_p .menu{
+	height:20px;
+	text-align:right;
+	color:#89ba54;
+	margin-top:10px;
+	width:auto;
+}
+#header_p .menu a{
+	font-size:12px;
+	color:#4f9a09;
+	font-weight:bolder;
+	font-stretch:expanded;
+	margin:5px 5px 2px 3px;
+}
+#header_p .menu a:hover{
+	color:#0c5cd5;
+}
+
+.text{
+	color:#666666;
+	font-size:12px;
+}
+
+#parea{
+	background:url(../images/propety_bg.gif) repeat-x;
+	height:auto;
+	font-family:Verdana,Arial,Sans-Serif;
+	font-size:12px;
+	color:#333333;
+}
+
+.pcontent{
+	padding:10px;
+	color:#666666;
+	font-size:12px;
+}
+
+.lh{line-height:25px;}
+
+.link a{ color:#666666;}
+
+.pcontent p{
+	padding-bottom:5px;
+	text-align:justify;
+}
+
+.pcontent ul li{
+	list-style-type:decimal;
+	margin-left:20px;
+}
+
+.pcontent ul ul li{
+	list-style-type:lower-alpha;
+	margin-left:30px;
+}
+
+
+.ptitle{
+	background:url(../images/title_bg.png) no-repeat;
+	height:20px;
+	font-size:13px;
+	color:#0c5cd5;
+	font-weight:bold;
+	padding:2px 0 0 3px;
+}
+
+.sub_title{
+	color:#090;
+	font-size:12px;
+	text-decoration:underline;
+	text-align:justify;
+}
+
+.sub_title_1{
+	color:#F00;
+	font-size:12px;
+	text-decoration:underline;
+	text-align:justify;
+}
+.sub_title_11{
+	color:gray;
+	font-size:13px;
+	text-align:justify;
+}
+
+
+.ptitle input[type=button]{
+	float:right;
+	background:url(../images/back.png) no-repeat;
+	width:47px;
+	height:16px;
+}
+
+
+body input[type=submit],[type=reset],[type=button]{
+	color:#FFFFFF;
+	background:url(../images/button.png) no-repeat ;
+	width:65px;
+	height:23px;
+	padding-bottom:4px;
+	border:0;
+	font-size:12px;
+	cursor:pointer;
+}
+
+.th{
+	background-color:#d8d8d8;
+	border:#CCCCCC 1px solid;
+	text-align:center;
+	font-weight:bold;
+	font-size:12px;
+}
+
+.td{
+	height:20px;
+	font-size:13px;
+	border:#CCCCCC 1px solid;
+	text-align:center; }
+
+
+.display_msg {
+	height:20px;
+	padding-top:10px;
+	text-align:center;
+	font-size:12px;
+}
+
+.display_msg ul li{ visibility:hidden;}
+.display_msg ul li:first-child{ visibility:visible;}
+	
+.gre{color:green;}
+.red{color:red;}
+
+.bold{ font-weight:bold;}
+.hint{margin-left:5px; font-size:11px; color:#999;}
+
+/* pagination styles*/
+div.pagination {
+	padding:3px;
+	margin:30px;
+	text-align:center;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	
+	text-decoration: none; 
+	color: #88AF3F;
+}
+div.pagination a:hover, div.pagination a:active {
+	border:#666666 1px solid;
+	color: #638425;
+	background-color: #F1FFD6;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #B2E05D;
+	font-weight: bold;
+	background-color: #B2E05D;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
+
+.username{
+	float:left;
+	font-size:12px; 
+	margin-top:5px;
+	padding:2px 4px 2px 4px;
+	font-weight:bold;
+	text-transform:capitalize;
+}
+
+img{border:none;}
+
+.hiddenDiv {display: none;}
+.visibleDiv {display: block;}
+
+/* Drop down menu */
+a									{ text-decoration: none; }
+ul									{ list-style: none; }
+
+/* 
+	LEVEL ONE
+*/
+ul.dropdown                         { position: relative; }
+ul.dropdown li                      { float: right; zoom: 1;}
+ul.dropdown a:hover		            { color: #000; }
+ul.dropdown a:active                { color: #ffa500; }
+ul.dropdown li a                    { display: block; color: #222; }
+ul.dropdown li:last-child a         { border-right: none; } /* Doesn't work in IE */
+ul.dropdown li.hover,
+ul.dropdown li:hover                { position: relative; }
+ul.dropdown li.hover a              {  }
+
+
+/* 
+	LEVEL TWO
+*/
+ul.dropdown ul 						{visibility: hidden; position: absolute; top: 100%; left: 0; }
+ul.dropdown ul li 					{ color: #000; border-bottom: 1px solid #ccc; float: none; background-color:#f0f0f0; padding-right:5px;}
+									  
+                                    /* IE 6 & 7 Needs Inline Block */
+ul.dropdown ul li a					{ border-right: none; text-align:center; display: inline-block; width:100%;} 
+
+/* 
+	LEVEL THREE
+*/
+ul.dropdown ul ul 					{ left: 100%; top: 0; }
+ul.dropdown li:hover > ul 			{ visibility: visible; }

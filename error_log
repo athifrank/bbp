@@ -1,0 +1,10 @@
+[03-Feb-2017 10:37:32 America/Detroit] PHP Parse error:  syntax error, unexpected 'noreply' (T_STRING) in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Register.php on line 110
+[03-Feb-2017 10:37:58 America/Detroit] PHP Parse error:  syntax error, unexpected 'noreply' (T_STRING) in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Register.php on line 110
+[03-Feb-2017 10:39:34 America/Detroit] PHP Parse error:  syntax error, unexpected '?>', expecting function (T_FUNCTION) in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Activation.php on line 52
+[03-Feb-2017 10:44:50 America/Detroit] PHP Parse error:  syntax error, unexpected '';' (T_CONSTANT_ENCAPSED_STRING) in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/config/routes.php on line 54
+[04-Feb-2017 13:20:20 America/Detroit] PHP Parse error:  syntax error, unexpected ')' in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Fpass.php on line 44
+[05-Feb-2017 00:45:48 America/Detroit] PHP Fatal error:  Call to a member function cus_search() on a non-object in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Interested.php on line 132
+[05-Feb-2017 00:47:06 America/Detroit] PHP Fatal error:  Call to a member function price_min() on a non-object in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Interested.php on line 134
+[05-Feb-2017 05:16:12 America/Detroit] PHP Fatal error:  Call to undefined method CI_Session::set_flashdat() in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Contactus.php on line 99
+[06-Feb-2017 01:15:43 America/Detroit] PHP Fatal error:  Can't use method return value in write context in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Location_search.php on line 17
+[06-Feb-2017 01:16:18 America/Detroit] PHP Fatal error:  Can't use method return value in write context in /home/cvrinfra/public_html/cvrinfra.com/bbp/application/controllers/Location_search.php on line 17
