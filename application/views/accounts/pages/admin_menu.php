@@ -18,7 +18,7 @@
             <li><a href="<?=site_url();?>users_properties" >User Properties  |</a></li>
             <li><a href="<?=site_url();?>admin_properties" >Admin Properties  |</a></li>
         	<li><a href="<?=site_url();?>add_property1" >Add Properties  |</a></li>
-            <li><a href="<?=site_url();?>admin" >Admin Home  |</a></li>
+            <li><a href="<?=site_url();?>admin/home" >Admin Home  |</a></li>
             <li><a href="<?=site_url();?>index" >Home Page |</a></li>
         
         </ul>

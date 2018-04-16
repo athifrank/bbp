@@ -13,6 +13,10 @@ class Admin extends CI_Controller {
 	{  
 	 $this->load->view('accounts/index1');
 	}
+	public function home()
+	{  
+	 $this->load->view('accounts/home1');
+	}
 	
 	public function login_admin()
 	{  
