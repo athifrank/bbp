@@ -51,7 +51,7 @@ document.getElementById("mm").src ="map_c.png"
 	.nav a{font-size: 14px; color: #333; text-decoration: none;}
 	.nav a:hover, .nav .current{color: #f00; text-decoration: underline;}
 		.a{height: 92px; overflow: hidden;}
-		#marqueeLi{ width: 100px; border:1px solid #ddd; line-height: 2.4; font-size: 30px; text-align: center; float: left;}
+		.marqueeLi{ width: 100px; border:1px solid #ddd; line-height: 2.4; font-size: 30px; text-align: center; float: left;}
 	</style>
 </head>
 <body>
@@ -117,15 +117,20 @@ document.getElementById("mm").src ="map_c.png"
 					//$query = mysql_query("SELECT i.* ,p.tit,p.loc FROM image i JOIN properties p ON i.pid=p.id where thumbs=2 order by pid desc;");										
 					//$no = mysql_num_rows($query);
 						$count=count($result);
-						foreach($result as $row)
+					foreach($result as $row)
 					{
-						
-					   $fname=$row['fname'];	
+						if($count==0){
+							echo 'No properties added';
+						}else{
+					    $fname=$row['fname'];	
 						$pid=$row['pid'];	
 						$tit=$row['tit'];
 						$loc=$row['loc'];
 						$TS=  md5("9223372036854775805: " . date("Y-m-d g:i:s ",  9223372036854775805));
-						echo '<ul id="marqueeUl"><li id="marqueeLi"><a href="'.site_url().'slide_property/index/'.$pid.'"><img src="'.base_url().'uploads/thumbs/'.$fname.'" title="'.$tit.'('.$loc.')"/></a></li></ul>';
+						echo '<ul id="marqueeUl"><li class="marqueeLi">
+						<a href="'.site_url().'slide_property/index/'.$pid.'">
+						<img src="'.base_url().'thumbs/'.$fname.'" title="'.$tit.'('.$loc.')"/></a></li></ul>';
+						}
 	
 					}
                   ?>
@@ -193,7 +198,7 @@ document.getElementById("mm").src ="map_c.png"
 								$TS=  md5("9223372036854775805: " . date("Y-m-d g:i:s ",  9223372036854775805));
 								echo '<a href="'.site_url().'project_details/index/'.$pid.'" target="_blank">
 									  <div class="box">
-									  <img src="'.base_url().'/thumbs/'.$thumbs.'"/>
+									  <img src="'.base_url().'thumbs/'.$thumbs.'"/>
 									  <div>'.$tit; echo $tit1.'<br />'.$ptype.'<br />'.$loc; echo $loc1.'</div>
 									  <div>more...</div>
 									  </div>
@@ -275,7 +280,7 @@ document.getElementById("mm").src ="map_c.png"
     });
 	$(function(){
 		// var time1 = new Date;
-		$(".a").pic_scroll();
+		$(".marqueeLi").pic_scroll();
 		// console.log("耗时：" + (new Date - time1) + " 毫秒");
 	})
 

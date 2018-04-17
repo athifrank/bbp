@@ -72,9 +72,9 @@
                                 $title=$row['title'];
                                 $content=$row['content'];
                                 $update_date=$row['update_date'];
-								$img=$row['img'];
+							    $img=$row['img'];
 								$discription=$row['discription'];
-                                echo '<tr><td class="td" width="100"><img src='.$img.' height="75" width="100"/></td>
+                                echo '<tr><td class="td" width="100"><img src="'.base_url().'/'.$img.'" height="75" width="100"/></td>
                                       <td class="td" width="200">'.$title.'</td>
 									  <td class="td" width="200" title="'.$discription.'">'.substr($discription,0, 30).'</td>
 									  <td class="td" width="200">'.$update_date.'</td>

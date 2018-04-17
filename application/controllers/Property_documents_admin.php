@@ -30,25 +30,25 @@ class Property_documents_admin extends CI_Controller {
 	   // Configuration - Your Options
 	   $allowed_filetypes = array('.doc,.docx,.xls,.pdf'); // These will be the types of file that will pass the validation.
 	   $max_filesize = 20072000; // Maximum filesize in BYTES (currently 0.5MB).
-	   $upload_path = 'savefiles/'; // The place the files will be uploaded to (currently a 'files' directory).
+	   $upload_path = 'uploads/documents/'; // The place the files will be uploaded to (currently a 'files' directory).
 	   //chmod($upload_path, 0777);
 	
 	   $filename = $_FILES['userfile']['name']; // Get the name of the file (including file extension).
-	   $ext = substr($filename, strpos($filename,'.'), strlen($filename)-1); // Get the extension from the filename.
+	   echo $ext = substr($filename, strpos($filename,'.'), strlen($filename)-1); // Get the extension from the filename.
 	 
 	   // Check if the filetype is allowed, if not DIE and inform the user.
 	   if(!in_array($ext,$allowed_filetypes))
-		   //echo 'upload file not allowed';
+		   echo 'upload file not allowed';
 		 //header("Location: property_documents.php?a=i11"); #die('The file you attempted to upload is not allowed.');
 	 
 	   // Now check the filesize, if it is too large then DIE and inform the user.
 	   if(filesize($_FILES['userfile']['tmp_name']) > $max_filesize)
-		   //echo 'file To large';
+		   echo 'file To large';
 		  //header("Location: property_documents.php?a=s11"); #die('The file you attempted to upload is too large.');
 	 
 	   // Check if we can upload to the specified path, if not DIE and inform the user.
 	   if(!is_writable($upload_path))
-		   //echo 'Please chmod to 777';
+		   echo 'Please chmod to 777';
 		  //header("Location: property_documents.php?a=d11"); #die('You cannot upload to the specified directory, please CHMOD it to 777.');
 	 
 	   // Upload the file to your specified path.
@@ -89,7 +89,7 @@ class Property_documents_admin extends CI_Controller {
 		if($query){
 		
 		$this->session->set_flashdata('new','* New details Updated');
-		redirect("property_documents_admin/edit_document/$id");		
+		redirect("property_documents_admin");		
 		//header ("Location: ../edit_document.php?a=ki9&b=$id");
 		}
 		else{
@@ -107,6 +107,7 @@ class Property_documents_admin extends CI_Controller {
 		$data['msg']=$this->property_documents_admin_mod->delete($id);
 		$this->load->view('accounts/del_document',$data);
 	}
+	
 	public function del_action(){
 
 	$id=$this->input->get('id');
@@ -115,7 +116,7 @@ class Property_documents_admin extends CI_Controller {
 	foreach($ro as $row){
 			$fname=$row['fname'];
 	}
-	unlink("savefiles/$fname");
+	unlink("uploads/documents/$fname");
 	$query2=$this->db->query("DELETE FROM documents where id='$id'");
 	if($query2){
 		$this->session->set_flashdata('del','One document deleted from the list');
