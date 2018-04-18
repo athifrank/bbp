@@ -29,6 +29,7 @@
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.8rc1.custom.min.js"></script>
+
 		<style>
 		</style>
 
@@ -217,7 +218,7 @@
 						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.$_SESSION['id'].');">
 							<img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
 							
-							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.');">
+							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.','.$_SESSION['id'].');">
 							<img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
 						  
 						  </div>
@@ -288,21 +289,18 @@
 $('a[id^="wish"]').hide();
 $('a[id^="wish1"]').show();
 
-/* function _wish_color(){
-	   $.ajax({
-                method: 'GET',
-                url: '<?=site_url();?>zonal_wishlist/add',
-				success:function(data){
-				var val = data.toString(10).split('');
-				for (var i=0,n=val.length; i<n; i++){
-                  $('#wish1'+val[i]).hide();
-				   $('#wish'+val[i]).show();
-                 }
-				}
-            });
-	
+function _getWishList(){
+	var data='<?php if(isset($wishlist)){foreach($wishlist as $row ){echo $val=$row['p_id'];}}else{echo 'null';}?>';
+	var split_val=data.split("");
+	var len=split_val.length;
+	for(var i=0;i<len;i++){
+		console.log(i);
+		$("#wish1"+split_val[i]).hide();
+		$("#wish"+split_val[i]).show();
+	}
 }
-_wish_color(); */
+
+_getWishList();
 
 function wish1(id,user){
 	if(user==null){
@@ -314,15 +312,29 @@ function wish1(id,user){
 				data:{id:id,col:col,user:user},
                 url: '<?=site_url();?>zonal_wishlist/add',
 				success:function(){
-					alert('Property number '+id+' added is wish list');
+					alert('Property number '+id+' added to wish list');
+					location.reload();
 				}
             });
 	}
 }
 
-function wish(id){
+function wish(id,user){
+	console.log(id);
+		if(user==null){
+				alert('please login first');
+			}else{
+			   $.ajax({
+						method: 'POST',
+						data:{id:id,user:user},
+						url: '<?=site_url();?>zonal_wishlist/del',
+						success:function(){
+							alert('Property number '+id+' deleted from wish list');
+							location.reload();
+						}
+					});
+			}
 
-	
 }
 
 function price_search(data){

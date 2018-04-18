@@ -29,6 +29,7 @@
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
 		<a class="sort">Relevant</a>
+		<a class="sort" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
 		<input type="button"  onclick="location.href='<?=site_url();?>index'"/>
 	</div>
 	<br>
@@ -82,8 +83,12 @@
 						  echo'<br /></div>
 						  <div>
 						  <div class="addcom">
-							<a class="wishli" title="Wishlist"><img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
-							<a class="wishi" title="Wishlist"><img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.$_SESSION['id'].');">
+							<img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
+							
+							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.','.$_SESSION['id'].');">
+							<img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  
 						  </div>
 						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
@@ -148,5 +153,57 @@
   
   </script>
 
+  
+<script type="text/javascript" >
+$('a[id^="wish"]').hide();
+$('a[id^="wish1"]').show();
+
+function _getWishList(){
+	var data='<?php foreach($wishlist as $row ){echo $val=$row['p_id'];};?>';
+	var split_val=data.split("");
+	var len=split_val.length;
+	for(var i=0;i<len;i++){
+		$("#wish1"+split_val[i]).hide();
+		$("#wish"+split_val[i]).show();
+	}
+}
+
+_getWishList();
+
+function wish1(id,user){
+	if(user==null){
+		alert('please login first');
+	}else{
+	var col='g';
+	   $.ajax({
+                method: 'POST',
+				data:{id:id,col:col,user:user},
+                url: '<?=site_url();?>zonal_wishlist/add',
+				success:function(){
+					alert('Property number '+id+' added to wish list');
+					location.reload();
+				}
+            });
+	}
+}
+
+function wish(id,user){
+	console.log(id);
+		if(user==null){
+				alert('please login first');
+			}else{
+			   $.ajax({
+						method: 'POST',
+						data:{id:id,user:user},
+						url: '<?=site_url();?>zonal_wishlist/del',
+						success:function(){
+							alert('Property number '+id+' deleted from wish list');
+							location.reload();
+						}
+					});
+			}
+
+}
+</script>
 </body>
 </html>

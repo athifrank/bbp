@@ -32,6 +32,11 @@ class Zonal_wishlist_mod extends CI_model {
 		}
   }
   
+  public function del_list($id,$user){
+	  $sql="delete from wish_list where p_id=$id and u_id=$user";
+	  $this->db->query($sql);
+  }
+  
 
 
   
