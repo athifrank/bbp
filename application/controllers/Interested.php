@@ -28,13 +28,13 @@ class Interested extends CI_Controller {
 	foreach($ro as $row){
 	$tit=$row['tit'];
 	$eid=$row['eid'];
-	$ename=$row['name'];
+	echo $ename=$row['name'];
 	$pid=$row['id'];
 	}
 	
 	#mail 
-	$from = $mail;
-	$to    = $eid;
+	echo $from = $mail;
+	echo $to    = $eid;
 
 	$subject  = 'Bangalore Best Property';			
 	$message  = '<html>

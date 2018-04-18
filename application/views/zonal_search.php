@@ -57,6 +57,7 @@
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
 		<a class="sort">Relevant</a>
+		<a class="sort" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
 		<input type="button"  onclick="location.href='<?=site_url();?>index'"/>
 	</div>
 
@@ -171,7 +172,7 @@
 				echo '<br><br><div class="td">Properties not found for such criteria</div>';
 		}
 		else
-		{						
+		{
 			$s=1;
 			foreach($showproperties as $row)
 			{
@@ -213,8 +214,12 @@
 						  echo'<br /></div>
 						  <div>
 						  <div class="addcom">
-							<a class="wishli" title="Wishlist"><img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
-							<a class="wishi" title="Wishlist"><img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.$_SESSION['id'].');">
+							<img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
+							
+							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.');">
+							<img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  
 						  </div>
 						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
@@ -280,6 +285,46 @@
   </script>
 
 <script type="text/javascript" >
+$('a[id^="wish"]').hide();
+$('a[id^="wish1"]').show();
+
+/* function _wish_color(){
+	   $.ajax({
+                method: 'GET',
+                url: '<?=site_url();?>zonal_wishlist/add',
+				success:function(data){
+				var val = data.toString(10).split('');
+				for (var i=0,n=val.length; i<n; i++){
+                  $('#wish1'+val[i]).hide();
+				   $('#wish'+val[i]).show();
+                 }
+				}
+            });
+	
+}
+_wish_color(); */
+
+function wish1(id,user){
+	if(user==null){
+		alert('please login first');
+	}else{
+	var col='g';
+	   $.ajax({
+                method: 'POST',
+				data:{id:id,col:col,user:user},
+                url: '<?=site_url();?>zonal_wishlist/add',
+				success:function(){
+					alert('Property number '+id+' added is wish list');
+				}
+            });
+	}
+}
+
+function wish(id){
+
+	
+}
+
 function price_search(data){
 	//alert(123);
 	$z1='<?php echo $zone_id;?>';

@@ -8,13 +8,14 @@ class Zonal_search extends CI_Controller {
 		$this->load->database();
 		$this->load->model('slider1_mod');
 		$this->load->model('zonal_search_mod');
-
+        $this->load->model('Zonal_wishlist_mod');
 	}
 	public function index()
 	{
       $i=$this->uri->segment(3);
 	  $data['zone_id']=$i;
       $data['showproperties']=$this->zonal_search_mod->zonal_search( $i);
+	  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
  	  //print_r($data);
 	  $data['location_search']=$this->zonal_search_mod->location_search( );
 	  $data['price_min']=$this->slider1_mod->price_min();
