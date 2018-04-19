@@ -11,7 +11,11 @@ class Zonal_wishlist extends CI_Controller {
 	}
 	public function index()
 	{
-      $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']);  
+     if(isset($_SESSION['id'])){
+	  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
+	  }else{
+		 $data['wishlist']=$this->Zonal_wishlist_mod->get_pro('0');  
+	  } 
      $this->load->view('zonal_wish',$data); 
 	}
 	

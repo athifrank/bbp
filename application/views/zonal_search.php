@@ -215,10 +215,10 @@
 						  echo'<br /></div>
 						  <div>
 						  <div class="addcom">
-						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.$_SESSION['id'].');">
+						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
 							<img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
 							
-							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.','.$_SESSION['id'].');">
+							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
 							<img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
 						  
 						  </div>
