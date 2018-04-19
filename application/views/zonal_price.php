@@ -125,12 +125,12 @@
 						  if(!empty($bhk))echo'<span class="bhk">'.$ptype;
 						  echo'<br /></div>
 						  <div>
-						  <div class="addcom">
-						  <a  title="add to Wishlist" id="wish1'.$id.'" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
-							<img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
+						   <div class="addcom">
+						  <a  title="add to Wishlist" class="circle_wish" id="wish1'.$id.'" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:gray;margin-top: 3px;"></i></a>
 							
-							<a  title="added in Wishlist" id="wish'.$id.'" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
-							<img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+							<a  title="added in Wishlist" class="circle_wish" id="wish'.$id.'" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:green;margin-top: 3px;"></i></a>
 						  
 						  </div>
 						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>

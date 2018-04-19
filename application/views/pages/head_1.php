@@ -4,11 +4,32 @@
 <title>Bangalore Best Property - Real Estate in Bangalore - Buy, Sell, Rent  Apartments, Plot, House, villa, Commercial Properties in Bangalore</title>
 <link href="<?=base_url();?>assets/css/zonal.css" type="text/css" rel="stylesheet" />
 <link href="<?=base_url();?>assets/css/portal.css" type="text/css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="<?=base_url();?>assets/images/favicon.png" rel="shortcut icon" />
 <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script type="text/javascript">setTimeout(function() {$('#h1').fadeOut('slow');}, 5000);</script>
 <script type="text/javascript">setTimeout(function() {$('.h1').fadeOut('slow');}, 4000);</script>
 <script language="JavaScript" src="<?=base_url();?>assets/js/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
+
+<style>
+.circle_wish {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: hsla(0,0%,100%,.85);
+    border: 1px solid #ccc;
+    color: #999;
+    height: 32px;
+    width: 32px;
+    line-height: 27px;
+    text-align: center;
+    padding: 0;
+    transition: all .4s ease;
+}
+
+</style>
 
 <script type="text/javascript">
 
