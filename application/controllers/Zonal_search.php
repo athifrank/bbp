@@ -21,7 +21,7 @@ class Zonal_search extends CI_Controller {
 		 $data['wishlist']=$this->Zonal_wishlist_mod->get_pro('0');  
 	  }
  	  //print_r($data);
-	  $data['location_search']=$this->zonal_search_mod->location_search( );
+	  $data['location_search']=$this->zonal_search_mod->location_search();
 	  $data['price_min']=$this->slider1_mod->price_min();
 	  $data['price_max']= $this->slider1_mod->price_max();
 	  $data['area_min']= $this->slider1_mod->area_min();

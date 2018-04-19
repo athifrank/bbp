@@ -10,8 +10,24 @@
 <link href="<?=base_url();?>assets/images/favicon.png" rel="shortcut icon" />
 <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script type="text/javascript">setTimeout(function() {$('#h1').fadeOut('slow');}, 5000);</script>
+<script type="text/javascript">setTimeout(function() {$('#h2').fadeOut('slow');}, 5000);</script>
 <script type="text/javascript">setTimeout(function() {$('.h1').fadeOut('slow');}, 4000);</script>
 <script language="JavaScript" src="<?=base_url();?>assets/js/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+<!-- facebook config -->
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
 
 <style>
 .circle_wish {

@@ -24,15 +24,10 @@
 <head>
 <?php include('pages/head_1.php')?>
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-		<link type="text/css" rel="stylesheet" href="css/jquery-ui-1.8rc1.custom.css"/>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.8rc1.custom.min.js"></script>
-
-		<style>
-		</style>
-
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui-1.8rc1.custom.css"/>
+        <script type="text/javascript" src="<?=base_url();?>assets/js/jquery-ui-1.8rc1.custom.min.js"></script>
 <script>
 	$(window).scroll(function(){
 		
@@ -45,6 +40,35 @@
 		}
 	});
 </script>
+		<script type="text/javascript">
+        <!--
+        //initial checkCount of zero
+        var checkCount=0
+        
+        //maximum number of allowed checked boxes
+        var maxChecks=3
+        
+        function setChecks(obj){3
+        //increment/decrement checkCount
+        if(obj.checked){
+        checkCount=checkCount+1
+        }else{
+        checkCount=checkCount-1
+        }
+        //if they checked a 4th box, uncheck the box, then decrement checkcount and pop alert
+        if (checkCount>maxChecks){
+        obj.checked=false
+        checkCount=checkCount-1
+        alert('You can Compare only '+maxChecks+' Properties at a time')
+        }
+        }
+        function setin(obj) {
+			console.log(obj);
+        pid = obj;
+        document.getElementById("set").innerHTML = '<input type="hidden" name="id" value="'+pid+'" />';
+        }
+        //-->
+        </script>
 </head>
 <body>
 <?php include('pages/header_1.php')?>
@@ -61,60 +85,21 @@
 		<a class="sort" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
 		<input type="button"  onclick="location.href='<?=site_url();?>index'"/>
 	</div>
-
+	
+	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
+	  	       <div class="gre" id="h1"><?php echo $this->session->flashdata('we');?></div>
+				<div class="gre" id="h2"><?php echo $this->session->flashdata('server');?></div>
+	 </div> 
+	  		
       <form action="compare_properties.php" method="post">
       <input type="hidden" name="i" value="<?php //echo $i;?>" />
       <input type="hidden" name="page" value="zonal_search.php" >
-   <!--   <div class="display_msg" style="height:30px;">
-		<table>
-            <tr>
-           		 <td>
-            	<div id="jslider1">
-                	<div id="range">Price <span id="amount1"></span></div>
-                	<div id="slider1"></div>
-            	</div>
-            	</td>
-                
-                <td>
-                	<div id="jslider2">
-                    	<div id="range">Area <span id="amount2"></span></div>
-                    	<div id="slider2"></div>
-               		</div>
-                </td>
-            
-            	<td>
-            		<div id="jslider3">
-                		<div id="range">Size <span id="amount3"></span></div>
-                		<div id="slider3"></div>
-            		</div>
-            	</td>
-
-            	
-           </tr>
-         </table>
-      </div>
       <div class="display_msg" style="margin-top:10px; height:30px;">
-            <div style="float:left; width:150px;">
-            Price
-            <select class="price">
-            	<option value="1">Low to high</option>
-                <option value="2">High to low</option>
-            </select>
-            </div>
-            
-            <div style="float:left; text-align:center; width:500px;">
-            <?php
-				   /*  $run->error();
-					$a=$_REQUEST['a'];
-					if($a == '2i5')echo '<div class="red" id="h1">*Atleast two properties is needed to compare</div>';
-					if($a == '2i8')echo '<div class="red" id="h1">*SMTP error try again later</div>';
-					if($a == '2i9')echo '<div class="gre" id="h1">*We have communicated your message to the property owner</div>'; */
-			?>
-            </div>
             <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
-      </div>-->
-	  
+      </div>
 	  </form>
+
+	  
 	  <div id="accordion" class="refine_search">
 	  
 		<h3 class="refine_title">Locality</h3>
@@ -224,14 +209,17 @@
 						  </div>
 						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
-								<a href="#inline_content" class="inline" onclick="setin('.$id.')">Contact</a>
+								<a href="#ex1" rel="modal:open" onclick="setin('.$id.')">Contact</a>
 							</div>
 							<ul id="navlist">
 								<li id="home"><a href="default.asp"></a></li>
 								<li id="prev"><a href="css_intro.asp"></a></li>
 								<li id="next"><a href="css_syntax.asp"></a></li>
 							</ul>
-							<div class="addcom" style="float:right; margin-right:20px;"><button class="share">share</button>
+							<div class="addcom" style="float:right; margin-right:20px;">
+							<button class="share"><a target="__blank" 
+							href="https://www.facebook.com/sharer/sharer.php?u='.site_url().'slide_property/index/'.$id.'"
+							class="fb-xfbml-parse-ignore">share</a></button>
 							</div>
 						  </div>
 						  </div>';
@@ -256,22 +244,23 @@
 <div id="footer">
 	<?php include("pages/footer.php");?>
 </div> 
-		<div style='display:none'>
-			<div id='inline_content' style='padding:10px; background:#fff;'>
-			<form action="interested.php" method="post" name="myform" id="myform">
-            <div id="set"></div>
+<div style='display:none'>
+			<div id='ex1' class="modal" style='padding:10px; background:#fff;'>
+			<form action="<?=site_url();?>interested/zonal_contact" method="post" name="myform" id="myform">
             <table>
             <tr><td height="20" class="red display_msg" colspan="3"><div id="myform_errorloc" class="error_strings"></div></td></tr>
             <tr><td height="40">Name</td><td></td><td><input type="text" name="name" class="tdbox" ></td></tr>
             <tr><td height="40">Mobile</td><td></td><td><input type="text" name="mobi" class="tdbox"></td></tr>
             <tr><td height="40">Email-id*</td><td></td><td><input type="text" name="eid" class="tdbox" ></td></tr>
-            <tr><td></td><td></td><td height="40"><input type="hidden" name="page" value="zonal_search.php" >
-            <input type="hidden" name="i" value="<?php echo $i ?>" >
+            <tr><td></td><td><div id="set"></div></td><td height="40"><input type="hidden" name="page" value="custom_search.php" >
+			<input type="hidden" name="zone" value="<?php echo $this->uri->segment(3);?>" >
             <input type="submit" value="Submit" ></td></tr>
             </table>
             </form>	
 		  </div>
-	   </div>
+</div>
+
+
        <script language="JavaScript" type="text/javascript"
     xml:space="preserve">//<![CDATA[
 //You should create the validator only after the definition of the HTML form
@@ -288,7 +277,9 @@
 <script type="text/javascript" >
 $('a[id^="wish"]').hide();
 $('a[id^="wish1"]').show();
-
+function formClick(){
+	alert(1);
+}
 function _getWishList(){
 	var data='<?php if(isset($wishlist)){foreach($wishlist as $row ){echo $val=$row['p_id'];}}else{echo 'null';}?>';
 	var split_val=data.split("");
