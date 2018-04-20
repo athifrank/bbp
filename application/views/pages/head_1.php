@@ -7,6 +7,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- bootstrap added
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+-->
+	
 <link href="<?=base_url();?>assets/images/favicon.png" rel="shortcut icon" />
 <script type="text/javascript" src="<?=base_url();?>assets/js/jquery.min.js"></script>
 <script type="text/javascript">setTimeout(function() {$('#h1').fadeOut('slow');}, 5000);</script>
@@ -77,3 +83,54 @@ a.current {
   color:white;
 }
 </style>
+
+<style>
+.dropbtn {
+    background-color: #3e8e41;
+    color: white;
+    padding: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    margin-top: 21px;
+    border-radius: 7px;
+    font-weight: bold;
+    margin-right: 7px;
+	
+}
+
+.dropup {
+    position: relative;
+    display: inline-block;
+}
+
+.dropup-content {
+     display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 72px;
+    bottom: 26px;
+    z-index: 1;
+    min-height: 36px;
+    margin-left: -6px;
+    border-radius: 10px;
+}
+
+.dropup-content a {
+    color: black;
+    padding: 1px 2px 0px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropup-content a:hover {background-color: #ccc}
+
+.dropup:hover .dropup-content {
+    display: block;
+}
+
+.dropup:hover .dropbtn {
+    background-color: #3e8e41;
+}
+</style>
+

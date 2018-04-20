@@ -216,11 +216,24 @@
 								<li id="prev"><a href="css_intro.asp"></a></li>
 								<li id="next"><a href="css_syntax.asp"></a></li>
 							</ul>
-							<div class="addcom" style="float:right; margin-right:20px;">
-							<button class="share"><a target="__blank" 
+							
+							<div class="" style="float:right; margin-right:20px;    margin-right: 84px;margin-top: -44px;">
+							<div class="dropup">
+							  <button class="dropbtn">share</button>
+							  <div class="dropup-content">
+							<a  target="__blank" 
 							href="https://www.facebook.com/sharer/sharer.php?u='.site_url().'slide_property/index/'.$id.'"
-							class="fb-xfbml-parse-ignore">share</a></button>
+							class="fb-xfbml-parse-ignore">
+							<img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/facebook-square.svg">
+                            </a>
+						   <a href="https://plus.google.com/share?url='.site_url().'slide_property/index/'.$id.'" onclick="javascript:window.open(this.href,,menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600);return false;">							
+							  <img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/google-plus-square.svg">
+							</a>
+							  </div>
 							</div>
+							</div>
+							
+							
 						  </div>
 						  </div>';
 						  $s++;
