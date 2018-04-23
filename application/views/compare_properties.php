@@ -21,7 +21,7 @@
 <div id="content" class="wrapper">
  <br />
   <div id="parea">
-        	<div class="ptitle">Compare Properties <input type="button"  onclick="window.location.href='<?=site_url();?>index'"/></div>
+        	<div class="ptitle">Compare Properties <input type="button"  onclick="javascript:history.back()"/></div>
             <div class="pcontent">
             	<div class="display_msg"></div>
               <div style="float:left;">

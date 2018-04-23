@@ -13,8 +13,7 @@ class Compare_properties extends CI_Controller {
 	{
 
       $data['com_pro']=$this->compare_properties_mod->com_pro(); 	  
-
-     $this->load->view('compare_properties',$data); 
+      $this->load->view('compare_properties',$data); 
 	}
 	
 	

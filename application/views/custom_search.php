@@ -142,7 +142,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         //maximum number of allowed checked boxes
         var maxChecks=3
         
-        function setChecks(obj){3
+        function setChecks(obj){
         //increment/decrement checkCount
         if(obj.checked){
         checkCount=checkCount+1
@@ -171,7 +171,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="content" class="wrapper">
  <br />
   <div id="property_result" class="left">
-      <div class="ptitle"><?php //echo "$zone Properties" ?><input type="button"  onclick="location.href='<?=site_url();?>index'"/></div>
+      <div class="ptitle"><?php //echo "$zone Properties" ?><input type="button"  onclick="javascript:history.back()"/></div>
       <form action="<?=site_url();?>compare_properties" method="post" name="myform">
       <input type="hidden" name="i" value="<?php  foreach($showproperties as $row){	$i=$row['pid']; echo $i;} ?>" />
       <input type="hidden" name="page" value="index.php" >

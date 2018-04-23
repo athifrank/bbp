@@ -7,8 +7,12 @@ class Compare_properties_mod extends CI_model {
 	 $i=$this->input->post('i');
 	 $c=$this->input->post('c');
 	 $cn = count($c);
-	 	if($cn == 2)$sql = $this->db->query("SELECT * from properties WHERE id in ($c[0] ,$c[1])");
-		else {$sql =$this->db->query("SELECT * from properties WHERE id in ($c[0] ,$c[1] ,$c[2])");}
+	 	if($cn == 2){
+			$sql = $this->db->query("SELECT * from properties WHERE id in ($c[0] ,$c[1])");
+		}
+		else {
+			$sql =$this->db->query("SELECT * from properties WHERE id in ($c[0] ,$c[1] ,$c[2])");
+			}
 	   $row=$sql->result_array();
 	   return $row;	 
   }

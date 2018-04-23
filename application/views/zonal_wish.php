@@ -69,15 +69,12 @@
 				<div class="gre" id="h2"><?php echo $this->session->flashdata('server');?></div>
 	 </div> 
 	  		
-      <form action="compare_properties.php" method="post">
-      <input type="hidden" name="i" value="<?php //echo $i;?>" />
+	    <form action="<?=site_url();?>compare_properties" method="post">
+      <input type="hidden" name="i" value="<?php  foreach($wishlist as $row){	$i=$row['pid']; echo $i;};?>" />
       <input type="hidden" name="page" value="zonal_search.php" >
       <div class="display_msg" style="margin-top:10px; height:30px;">
             <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
       </div>
-	  </form>
-
-	  
 	
       <div id="products1">
 	  	<?php //showproperties('', $zone); ?>
@@ -136,7 +133,7 @@
 							<i class="fa fa-heart" style="font-size:24px;color:green;margin-top: 3px;"></i></a>
 						  
 						  </div>
-						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
+						  <div class="addcom" style="margin: 14px;"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
 								<a href="#ex1" rel="modal:open" onclick="setin('.$id.')">Contact</a>
 							</div>
@@ -172,6 +169,7 @@
 
 		?>
       </div>
+	  	 </form>
       <nav id="page-nav">
 			<a href="#"></a>
 	  </nav>
