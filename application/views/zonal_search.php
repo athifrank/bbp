@@ -82,8 +82,8 @@
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
 		<a class="sort">Relevant</a>
-		<a class="sort" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
-		<input type="button"  onclick="location.href='<?=site_url();?>index'"/>
+		<a class="sort" style="margin-left: 888px;" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
+		<input type="button"  onclick="javascript:history.back()"/>
 	</div>
 	
 	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
@@ -153,7 +153,6 @@
 	  
 	  
       <div id="products">
-	  	<?php //showproperties('', $zone); ?>
 		<?php
 		if(empty ($showproperties))
 		{
@@ -293,6 +292,7 @@
 <script type="text/javascript" >
 $('a[id^="wish"]').hide();
 $('a[id^="wish1"]').show();
+
 function formClick(){
 	alert(1);
 }
@@ -355,6 +355,9 @@ function bhk(data){
 	$("#products").load('<?=site_url();?>bhk/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,zone:$z2});
 	
 }
+
+
+
 </script>
 </body>
 </html>

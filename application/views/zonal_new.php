@@ -57,8 +57,8 @@
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
 		<a class="sort">Relevant</a>
-		<a class="sort" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
-		<input type="button"  onclick="location.href='<?=site_url();?>index'"/>
+		<a class="sort" style="margin-left: 888px;" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
+		<input type="button"  onclick="javascript:history.back()"/>
 	</div>
 	<br/>
 	

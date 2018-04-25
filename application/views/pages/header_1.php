@@ -16,8 +16,14 @@
     <div class="logo"><img src="<?=base_url();?>assets/images/logo.png" /></div>
     <div class="menu">
 	<a href="<?=site_url();?>index">Home</a>|
-        <a href="<?=site_url();?>login">Signin</a>|
-        <a href="<?=site_url();?>register">Register</a>|
+	<?php 
+	if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
+		echo '<a href="'.site_url().'login">'.$_SESSION['name'].'</a>|';
+	}else{
+		echo '<a href="'.site_url().'login">Signin</a>|
+              <a href="'.site_url().'register">Register</a>|';
+	 }
+		?>
         <a href="<?=site_url();?>pass" >Post Your Property</a>|
 		<a href="<?=site_url();?>contactus">Contact Us</a>
   <!-----      <a href="knowledge_house.php">Knowledge House</a>|

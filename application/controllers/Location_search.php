@@ -8,6 +8,7 @@ class Location_search extends CI_Controller {
 		$this->load->database();
 		$this->load->model('zonal_search_mod');
 		$this->load->model('location_search_mod');
+		$this->load->model('Zonal_wishlist_mod');
 
 	}
 	public function index()
@@ -30,6 +31,12 @@ class Location_search extends CI_Controller {
 		  $data['showproperties']=$this->zonal_search_mod->zonal_search($id);
 		  $data['location_search']=$this->zonal_search_mod->location_search();
 		  $data['show_location']=$this->location_search_mod->search();
+		  
+		   if(isset($_SESSION['id'])){
+			  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
+			  }else{
+				 $data['wishlist']=$this->Zonal_wishlist_mod->get_pro('0');  
+			  }
 		  $this->load->view('location_search',$data); 
 
 	  }

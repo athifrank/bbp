@@ -11,11 +11,10 @@
 <head>
 <?php include('pages/head_1.php')?>
 		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-		<link type="text/css" rel="stylesheet" href="css/jquery-ui-1.8rc1.custom.css"/>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.8rc1.custom.min.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui-1.8rc1.custom.css"/>
+        <script type="text/javascript" src="<?=base_url();?>assets/js/jquery-ui-1.8rc1.custom.min.js"></script>
    <script>
 	$(window).scroll(function(){
 		
@@ -28,6 +27,36 @@
 		}
 	});
   </script>
+  
+  	<script type="text/javascript">
+        <!--
+        //initial checkCount of zero
+        var checkCount=0
+        
+        //maximum number of allowed checked boxes
+        var maxChecks=3
+        
+        function setChecks(obj){3
+        //increment/decrement checkCount
+        if(obj.checked){
+        checkCount=checkCount+1
+        }else{
+        checkCount=checkCount-1
+        }
+        //if they checked a 4th box, uncheck the box, then decrement checkcount and pop alert
+        if (checkCount>maxChecks){
+        obj.checked=false
+        checkCount=checkCount-1
+        alert('You can Compare only '+maxChecks+' Properties at a time')
+        }
+        }
+        function setin(obj) {
+			console.log(obj);
+        pid = obj;
+        document.getElementById("set").innerHTML = '<input type="hidden" name="id" value="'+pid+'" />';
+        }
+        //-->
+        </script>
   <script type="text/javascript">setTimeout(function() {$('#loc').fadeOut('slow');}, 2000);</script>
 
 </head>
@@ -38,87 +67,20 @@
  <br />
   <div id="property_result" class="left">
     <div class="ptitle">
-		<?php 
-/* 		function quote($n){
-			
-			return '"'.$n.'"';
-			
-		}
-		$top_val = $_POST['search_top'];if(isset($_POST["search_area"])){
-		$tes_loc = implode(',',array_map("quote",$_POST["search_area"]));
-		}else{
-			$tes_loc='';
-		}
-		if($top_val ==''){
-			$po_loc =$tes_loc;
-		}else if(isset($_POST["search_area"])){
-			
-			$po_loc = '"'.$top_val.'",'.$tes_loc;
-
-		}else{
-			$po_loc = '"'.$top_val.'"';
-		} */
-
-		?>
 		<a class="sort" href="<?=site_url();?>zonal_search/index/<?php echo $zone;?>">Sort by</a>
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
 		<a class="sort">Relevant</a>
-		<input type="button" onclick="location.href='index.php'"/>
+		<a class="sort" style="margin-left: 888px;" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
+		<input type="button"  onclick="javascript:history.back()"/>
 	</div>
 
-      <form action="compare_properties.php" method="post">
-      <input type="hidden" name="i" value="<?php //echo $i;?>" />
-      <input type="hidden" name="page" value="zonal_search.php" >
-	  </form>
-   <!--   <div class="display_msg" style="height:30px;">
-		<table>
-            <tr>
-           		 <td>
-            	<div id="jslider1">
-                	<div id="range">Price <span id="amount1"></span></div>
-                	<div id="slider1"></div>
-            	</div>
-            	</td>
-                
-                <td>
-                	<div id="jslider2">
-                    	<div id="range">Area <span id="amount2"></span></div>
-                    	<div id="slider2"></div>
-               		</div>
-                </td>
-            
-            	<td>
-            		<div id="jslider3">
-                		<div id="range">Size <span id="amount3"></span></div>
-                		<div id="slider3"></div>
-            		</div>
-            	</td>
-
-            	
-           </tr>
-         </table>
-      </div>
-      <div class="display_msg" style="margin-top:10px; height:30px;">
-            <div style="float:left; width:150px;">
-            Price
-            <select class="price">
-            	<option value="1">Low to high</option>
-                <option value="2">High to low</option>
-            </select>
-            </div>
-            
-            <div style="float:left; text-align:center; width:500px;">
-            <?php
-				  //  $run->error();
-					$a=$_REQUEST['a'];
-					if($a == '2i5')echo '<div class="red" id="h1">*Atleast two properties is needed to compare</div>';
-					if($a == '2i8')echo '<div class="red" id="h1">*SMTP error try again later</div>';
-					if($a == '2i9')echo '<div class="gre" id="h1">*We have communicated your message to the property owner</div>';
-			?>
-            </div>
-            <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
-      </div>-->
+  	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
+	  	       <div class="gre" id="h1"><?php echo $this->session->flashdata('we');?></div>
+				<div class="gre" id="h2"><?php echo $this->session->flashdata('server');?></div>
+	 </div> 
+	 
+	 
 	  <div id="accordion" class="refine_search">
 	   <span id="loc" style="color:red"><?php echo $this->session->flashdata('loc');?></span>
 		<h3 class="refine_title">Locality</h3>
@@ -167,6 +129,15 @@
 			<input type="checkbox" name="search_area[]" onclick="bhk(4);" />4Bhk<br />
 		</div>
 	  </div>
+	  
+	   <form action="<?=site_url();?>compare_properties" method="post">
+      <input type="hidden" name="i" value="<?php foreach($showproperties as $row){	$i=$row['pid']; echo $i;}?>" />
+      <input type="hidden" name="page" value="zonal_search.php" >
+      <div class="display_msg" style="margin-top:10px; height:30px;">
+            <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
+      </div>
+
+	  
       <div id="products">
 	  	<?php 
 
@@ -217,19 +188,40 @@
 						  echo'<br /></div>
 						  <div>
 						  <div class="addcom">
-							<a class="wishli" title="Wishlist"><img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
-							<a class="wishi" title="Wishlist"><img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  <a  title="add to Wishlist" class="circle_wish" id="wish1'.$id.'" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:gray;margin-top: 3px;"></i></a>
+							
+							<a  title="added in Wishlist" class="circle_wish" id="wish'.$id.'" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:green;margin-top: 3px;"></i></a>
+						  
 						  </div>
+						  <div class="addcom" style="margin: 14px;"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
-								<a href="#inline_content" class="inline" onclick="setin('.$id.')">Contact</a>
+								<a href="#ex1" rel="modal:open" onclick="setin('.$id.')">Contact</a>
 							</div>
 							<ul id="navlist">
 								<li id="home"><a href="default.asp"></a></li>
 								<li id="prev"><a href="css_intro.asp"></a></li>
 								<li id="next"><a href="css_syntax.asp"></a></li>
 							</ul>
-							<div class="addcom" style="float:right; margin-right:20px;"><button class="share">share</button>
+							
+							<div class="" style="float:right; margin-right:20px;    margin-right: 84px;margin-top: -44px;">
+							<div class="dropup">
+							  <button class="dropbtn">share</button>
+							  <div class="dropup-content">
+							<a  target="__blank" 
+							href="https://www.facebook.com/sharer/sharer.php?u='.site_url().'slide_property/index/'.$id.'"
+							class="fb-xfbml-parse-ignore">
+							<img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/facebook-square.svg">
+                            </a>
+						   <a href="https://plus.google.com/share?url='.site_url().'slide_property/index/'.$id.'" onclick="javascript:window.open(this.href,,menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600);return false;">							
+							  <img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/google-plus-square.svg">
+							</a>
+							  </div>
 							</div>
+							</div>
+							
+							
 						  </div>
 						  </div>';
 						  $s++;
@@ -251,20 +243,19 @@
 	<?php include("pages/footer.php");?>
 </div> 
 	<div style='display:none'>
-		<div id='inline_content' style='padding:10px; background:#fff;'>
-			<form action="interested.php" method="post" name="myform" id="myform">
-        <div id="set"></div>
+			<div id='ex1' class="modal" style='padding:10px; background:#fff;'>
+			<form action="<?=site_url();?>interested/zonal_contact" method="post" name="myform" id="myform">
             <table>
-				<tr><td height="20" class="red display_msg" colspan="3"><div id="myform_errorloc" class="error_strings"></div></td></tr>
-				<tr><td height="40">Name</td><td></td><td><input type="text" name="name" class="tdbox" ></td></tr>
-				<tr><td height="40">Mobile</td><td></td><td><input type="text" name="mobi" class="tdbox"></td></tr>
-				<tr><td height="40">Email-id*</td><td></td><td><input type="text" name="eid" class="tdbox" ></td></tr>
-				<tr><td></td><td></td><td height="40"><input type="hidden" name="page" value="zonal_search.php" >
-				<input type="hidden" name="i" value="<?php echo $i ?>" >
-				<input type="submit" value="Submit" ></td></tr>
+            <tr><td height="20" class="red display_msg" colspan="3"><div id="myform_errorloc" class="error_strings"></div></td></tr>
+            <tr><td height="40">Name</td><td></td><td><input type="text" name="name" class="tdbox" ></td></tr>
+            <tr><td height="40">Mobile</td><td></td><td><input type="text" name="mobi" class="tdbox"></td></tr>
+            <tr><td height="40">Email-id*</td><td></td><td><input type="text" name="eid" class="tdbox" ></td></tr>
+            <tr><td></td><td><div id="set"></div></td><td height="40"><input type="hidden" name="page" value="custom_search.php" >
+			<input type="hidden" name="zone" value="<?php echo $this->uri->segment(3);?>" >
+            <input type="submit" value="Submit" ></td></tr>
             </table>
             </form>	
-		</div>
+		  </div>
 	   </div>
 <script language="JavaScript" type="text/javascript"
 xml:space="preserve">//<![CDATA[
@@ -285,6 +276,61 @@ xml:space="preserve">//<![CDATA[
   
 //]]></script>
 <script type="text/javascript" >
+$('a[id^="wish"]').hide();
+$('a[id^="wish1"]').show();
+function formClick(){
+	alert(1);
+}
+function _getWishList(){
+	var data='<?php if(isset($wishlist)){foreach($wishlist as $row ){echo $val=$row['p_id'];}}else{echo 'null';}?>';
+	var split_val=data.split("");
+	var len=split_val.length;
+	for(var i=0;i<len;i++){
+		console.log(i);
+		$("#wish1"+split_val[i]).hide();
+		$("#wish"+split_val[i]).show();
+	}
+}
+
+_getWishList();
+
+function wish1(id,user){
+	if(user==null){
+		alert('please login first');
+	}else{
+	var col='g';
+	   $.ajax({
+                method: 'POST',
+				data:{id:id,col:col,user:user},
+                url: '<?=site_url();?>zonal_wishlist/add',
+				success:function(){
+					alert('Property number '+id+' added to wish list');
+					location.reload();
+				}
+            });
+	}
+}
+
+function wish(id,user){
+	console.log(id);
+		if(user==null){
+				alert('please login first');
+			}else{
+			   $.ajax({
+						method: 'POST',
+						data:{id:id,user:user},
+						url: '<?=site_url();?>zonal_wishlist/del',
+						success:function(){
+							alert('Property number '+id+' deleted from wish list');
+							location.reload();
+						}
+					});
+			}
+
+}
+
+
+
 function price_search(data){
 	//alert(123);
 	$z1='<?php foreach($show_location as $row) $location=$row['loc']; echo $location;?>';

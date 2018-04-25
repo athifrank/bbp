@@ -109,21 +109,46 @@ class Lakhs extends CI_Controller {
 						  if(!empty($bhk))echo'<span class="bhk">'.$ptype;
 						  echo'<br /></div>
 						  <div>
-						  <div class="addcom">
-							<a class="wishli" title="Wishlist"><img src="'.base_url().'assets/images/wish1.png" width="40" height="30" /></a>
-							<a class="wishi" title="Wishlist"><img src="'.base_url().'assets/images/wish.png" width="40" height="30" /></a>
+						  
+						    <div class="addcom">
+						  <a  title="add to Wishlist" class="circle_wish" id="wish1" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:gray;margin-top: 3px;"></i></a>
+							
+							<a  title="added in Wishlist" class="circle_wish" id="wish" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:green;margin-top: 3px;"></i></a>
+						  
 						  </div>
-						  <div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
+						  
+						  <div class="addcom" style="margin: 14px;"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
-								<a href="#inline_content" class="inline" onclick="setin('.$id.')">Contact</a>
+								<a href="#ex1" rel="modal:open" onclick="setin('.$id.')">Contact</a>
 							</div>
+							
 							<ul id="navlist">
 								<li id="home"><a href="default.asp"></a></li>
 								<li id="prev"><a href="css_intro.asp"></a></li>
 								<li id="next"><a href="css_syntax.asp"></a></li>
 							</ul>
-							<div class="addcom" style="float:right; margin-right:20px;"><button class="share">share</button>
+							
+							<div class="" style="float:right; margin-right:20px;    margin-right: 84px;margin-top: -44px;">
+							<div class="dropup">
+							  <button class="dropbtn">share</button>
+							  <div class="dropup-content">
+							<a  target="__blank" 
+							href="https://www.facebook.com/sharer/sharer.php?u='.site_url().'slide_property/index/'.$id.'"
+							class="fb-xfbml-parse-ignore">
+							<img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/facebook-square.svg">
+                            </a>
+						   <a href="https://plus.google.com/share?url='.site_url().'slide_property/index/'.$id.'" onclick="javascript:window.open(this.href,,menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600);return false;">							
+							  <img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/google-plus-square.svg">
+							</a>
+							  </div>
 							</div>
+							</div>
+						 <script>
+						 $("a#wish1").show();
+                        $("a#wish").hide();
+                          </script>							
 						  </div>
 						  </div>';
 						  $s++;
