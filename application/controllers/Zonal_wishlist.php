@@ -11,7 +11,7 @@ class Zonal_wishlist extends CI_Controller {
 	}
 	public function index()
 	{
-     if(isset($_SESSION['id'])){
+     if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
 	  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
 	  }else{
 		 $data['wishlist']=$this->Zonal_wishlist_mod->get_pro('0');  

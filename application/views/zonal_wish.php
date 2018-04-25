@@ -54,12 +54,7 @@
  <br />
   <div id="property_result" class="left">
     <div class="ptitle">
-		<?php //echo "$zone Properties" ?>
-		<a class="sort" href="<?=site_url();?>zonal_search/index/<?php echo $zone;?>">Sort by</a>
-		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
-		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
-		<a class="sort">Relevant</a>
-		<a class="sort" style="margin-left: 888px;" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
+		<a class="sort" style="margin-left: 560px;" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
 		<input type="button"  onclick="javascript:history.back()"/>
 	</div>
 	<br/>
@@ -70,7 +65,7 @@
 	 </div> 
 	  		
 	    <form action="<?=site_url();?>compare_properties" method="post">
-      <input type="hidden" name="i" value="<?php  foreach($wishlist as $row){	$i=$row['pid']; echo $i;};?>" />
+      <input type="hidden" name="i" value="<?php if($wishlist){foreach($wishlist as $row){	echo $row['pid'];}}else{ echo '';}?>" />
       <input type="hidden" name="page" value="zonal_search.php" >
       <div class="display_msg" style="margin-top:10px; height:30px;">
             <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
@@ -81,7 +76,7 @@
 		<?php
 		if(empty ($wishlist))
 		{
-				echo '<br><br><div class="td">Properties not found for such criteria</div>';
+				echo '<br><br><div class="td">Wish List is empty...</div>';
 		}
 		else
 		{						
