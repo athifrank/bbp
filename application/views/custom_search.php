@@ -1,5 +1,5 @@
 <?php
-/* 	include 'slider1.php';
+/* 	include 'slider.php';
 	$price_min = price_min(); //Get minimum price of product for slider min value
 	$price_max = price_max(); //Get maximum price of product for slide max value
 	$area_min = area_min(); //Get minimum area of product for slider min value
@@ -7,133 +7,39 @@
 	$bhk_min = bhk_min(); //Get maximum bhk of product for slide max value
 	$bhk_max = bhk_max(); //Get maximum bhk of product for slide max value
 	
-	require_once('accounts/action/jcode.php');
-	$run->error();
-	$z1=$_REQUEST['ptype'];
-	$z2=$_REQUEST['location'];
-	$z3=$_REQUEST['type'];
+    require_once('accounts/action/jcode.php'); 
+	$i=$_REQUEST['i'];
+	if($i==1)$zone='North Bangalore';
+	if($i==2)$zone='East Bangalore';
+	if($i==3)$zone='South Bangalore';
+	if($i==4)$zone='West Bangalore';
+	if($i==5)$zone='Central Bangalore'; */
+	defined('BASEPATH') OR exit('No direct script access allowed');
 	
-	$back = $_SERVER['HTTP_REFERER'];
-	if(empty($z1)) header ("Location:$back"); */
-defined('BASEPATH') OR exit('No direct script access allowed');
-	
+	$zone=$this->uri->segment(3);
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<?php include('pages/head.php')?>
-		 <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui-1.8rc1.custom.css"/>
+<?php include('pages/head_1.php')?>
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui-1.8rc1.custom.css"/>
         <script type="text/javascript" src="<?=base_url();?>assets/js/jquery-ui-1.8rc1.custom.min.js"></script>
-        <script type="text/javascript">
-            $(function() 
-			{
-				$z1='<?=$z1;?>';
-				$z2='<?=$z2;?>';
-				$z3='<?=$z3;?>';
-				$a1='<?=$price_min;?>';
-			  	$a2='<?=$price_max;?>';
-			  	$b1='<?=$area_min;?>';
-			  	$b2='<?=$area_max;?>';
-				$c1='<?=$bhk_min;?>';
-			  	$c2='<?=$bhk_max;?>';
-              	
-			  	$products = $('#products');//Caching product object
-			  	$ajaxMessage = $('#ajaxMessage');//Caching ajaxMessage object
-			  			
-			  	$slider1 = $("#slider1");//Caching slider object
-              	$amount1 = $("#amount1");//Caching amount object
-				
-				$slider2 = $("#slider2");//Caching slider object
-              	$amount2 = $("#amount2");//Caching amount object
-				
-				$slider3 = $("#slider3");//Caching slider object
-              	$amount3 = $("#amount3");//Caching amount object
-
-               	$slider1.slider
-				({
-                 	range: true, // necessary for creating a range slider
-                  	min: $a1, // minimum range of slider
-                  	max: $a2, //maximimum range of slider
-                  	values: [$a1, $a2], //initial range of slider
-                  	slide: function(event, ui) // This event is triggered on every mouse move during slide.
-				  	{ 
-				  		$a1=ui.values[0];
-					  	$a2=ui.values[1];
-                      	$amount1.html(' Rs ' + $a1 + ' - Rs ' + $a2);//set value of  amount span to current slider values
-                  	},
-                  	stop: function(event, ui) //This event is triggered when the user stops sliding.
-					{
-                      $ajaxMessage.css({display:'block'});
-                      $products.find('ul').css({opacity:.2});
-					  $products.load('<?=site_url();?>custom_search/show_pro',{price_min : $a1,price_max : $a2,area_min : $b1,area_max : $b2,bhk_min : $c1,bhk_max : $c2,z1 : $z1,z2 : $z2,z3 : $z3},
-					  function(){$ajaxMessage.css({display:'none'});});
-                  	}
-              	});
-				
-				$amount1.html(' Rs ' + $slider1.slider("values", 0) + ' - Rs ' + $slider1.slider("values", 1));
-			  
-			  	$slider2.slider
-				({
-                 	range: true, // necessary for creating a range slider
-                  	min: $b1, // minimum range of slider
-                  	max: $b2, //maximimum range of slider
-                  	values: [$b1, $b2], //initial range of slider
-                  	slide: function(event, ui) // This event is triggered on every mouse move during slide.
-				  	{ 
-				  	  $b1=ui.values[0];
-					  $b2=ui.values[1];
-                      $amount2.html($b1+' sqft - '+$b2+'sqft');//set value of  amount span to current slider values
-                  	},
-                  	stop: function(event, ui) //This event is triggered when the user stops sliding.
-					{
-                      $ajaxMessage.css({display:'block'});
-                      $products.find('ul').css({opacity:.2});
-                      $products.load('<?=site_url();?>custom_search/show_pro',{price_min : $a1,price_max : $a2,area_min : $b1,area_max : $b2,bhk_min : $c1,bhk_max : $c2,z1 : $z1,z2 : $z2,z3 : $z3},
-					  function(){$ajaxMessage.css({display:'none'}); });
-                    }
-              	});
-				
-				$amount2.html(" "+$slider2.slider("values", 0) + ' sqft  - ' + $slider2.slider("values", 1)+' sqft ');
-			
-				$slider3.slider
-				({
-                 	range: true, // necessary for creating a range slider
-                  	min: $c1, // minimum range of slider
-                  	max: $c2, //maximimum range of slider
-                  	values: [$c1, $c2], //initial range of slider
-                  	slide: function(event, ui) // This event is triggered on every mouse move during slide.
-				  	{ 
-				  	  $c1=ui.values[0];
-					  $c2=ui.values[1];
-                      $amount3.html(' bhk ' + $c1 + ' - bhk ' + $c2);//set value of  amount span to current slider values
-                  	},
-                  	stop: function(event, ui) //This event is triggered when the user stops sliding.
-					{
-                      $ajaxMessage.css({display:'block'});
-                      $products.find('ul').css({opacity:.2});
-                      $products.load('<?=site_url();?>custom_search/show_pro',{price_min : $a1,price_max : $a2,area_min : $b1,area_max : $b2,bhk_min : $c1,bhk_max : $c2,z1 : $z1,z2 : $z2,z3 : $z3},
-					  function(){$ajaxMessage.css({display:'none'}); });
-                    }
-              	});
-				
-				$amount3.html(" "+$slider3.slider("values", 0) + ' bhk  - ' + $slider3.slider("values", 1)+' bhk ');
-          });
-	   </script>
-		<link rel="stylesheet" href="<?=base_url();?>assets/css/colorbox.css" />
-		<script src="<?=base_url();?>assets/js/jquery.colorbox.js"></script>
-		<script>
-			$(document).ready(function(){
-				$(".inline").colorbox({inline:true, width:"26%", height:"45%"});
-				$('.price').change(function() {	$s=$(this).val();
-				  $ajaxMessage.css({display:'block'});
-                  $products.find('ul').css({opacity:.2});
-				  $products.load('<?=site_url();?>custom_search/show_pro',{price_min : $a1,price_max : $a2,area_min : $b1,area_max : $b2,bhk_min : $c1,bhk_max : $c2,z1 : $z1,z2 : $z2,z3 : $z3
-				  ,s:$s},
-				  function(){$ajaxMessage.css({display:'none'}); }); 
-				});
-			});
-		</script>
-        
+<script>
+	$(window).scroll(function(){
+		
+		var a =$(".refine_search").offset();
+		
+		if(a.top >136){
+		$(".refine_search").css('top','0');
+		}else{
+		$(".refine_search").css('top','136px');
+		}
+	});
+</script>
 		<script type="text/javascript">
         <!--
         //initial checkCount of zero
@@ -142,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         //maximum number of allowed checked boxes
         var maxChecks=3
         
-        function setChecks(obj){
+        function setChecks(obj){3
         //increment/decrement checkCount
         if(obj.checked){
         checkCount=checkCount+1
@@ -157,99 +63,115 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         }
         function setin(obj) {
+			console.log(obj);
         pid = obj;
         document.getElementById("set").innerHTML = '<input type="hidden" name="id" value="'+pid+'" />';
         }
         //-->
         </script>
-        
- 
 </head>
 <body>
-<?php include('pages/header.php')?>
+<?php include('pages/header_1.php')?>
 <!----- Banner begins -----> 
 <div id="content" class="wrapper">
  <br />
   <div id="property_result" class="left">
-      <div class="ptitle"><?php //echo "$zone Properties" ?><input type="button"  onclick="javascript:history.back()"/></div>
-      <form action="<?=site_url();?>compare_properties" method="post" name="myform">
-      <input type="hidden" name="i" value="<?php  foreach($showproperties as $row){	$i=$row['pid']; echo $i;} ?>" />
-      <input type="hidden" name="page" value="index.php" >
-      <div class="display_msg" style="height:30px;">
-		<table>
-            <tr>
-           		 <td>
-            	<div id="jslider1" style="font-size:12px;">
-                	<div id="range">Price<span id="amount1"></span></div>
-                	<div id="slider1"></div>
-            	</div>
-            	</td>
-                
-                <td>
-                	<div id="jslider2" style="font-size:12px;">
-                    	<div id="range">Area <span id="amount2"></span></div>
-                    	<div id="slider2"></div>
-               		</div>
-                </td>
-            
-            	<td>
-            		<div id="jslider3" style="font-size:12px;">
-                		<div id="range">Size <span id="amount3"></span></div>
-                		<div id="slider3"></div>
-            		</div>
-            	</td>
-
-            	
-           </tr>
-         </table>
-      </div>
-      <div class="display_msg" style="margin-top:10px; height:30px;">
-            <div style="float:left; width:150px;">
-            Price
-            <select class="price">
-            	<option value="1">Low to high</option>
-                <option value="2">High to low</option>
-            </select>
-            </div>
-            
-            <div style="float:left; text-align:center; width:500px;">
-            <?php
-			/* 
-				    $run->error();
-					$a=$_REQUEST['a'];
-					if($a == '2i5')echo '<div class="red" id="h1">*Atleast two properties is needed to compare</div>';
-					if($a == '2i8')echo '<div class="red" id="h1">*SMTP error try again later</div>';
-					if($a == '2i9')echo '<div class="gre" id="h1">*We have communicated your message to the property owner</div>'; */
-			?>
-			
-				<div class="gre" id="h1"><?php echo $this->session->flashdata('we');?></div>
+    <div class="ptitle">
+		<?php //echo "$zone Properties" ?>
+		<!--<a class="sort" href="<?=site_url();?>zonal_search/index/<?php echo $zone;?>">Sort by</a>
+		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
+		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
+		<a class="sort">Relevant</a>-->
+		<a class="sort" style="margin-left: 1055px;" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
+		<input type="button"  onclick="javascript:history.back()"/>
+	</div>
+	
+	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
+	  	       <div class="gre" id="h1"><?php echo $this->session->flashdata('we');?></div>
 				<div class="gre" id="h2"><?php echo $this->session->flashdata('server');?></div>
-            </div>
-            <div style="float:right; margin-right:10px; width: 90px;">
-			<input type="submit" value="Compare" /></div>
-      </div>
-      <div id="products">
-	  	<?php //echo $showproperties; ?>
-		<?php
+	 </div> 
+	  		
+    
+	  <div id="accordion" class="refine_search">
+	  
+		<h3 class="refine_title">Locality</h3>
 		
-		if(empty($showproperties))
+		<div class="ref_area">
+			<form method="post" action="<?=site_url();?>location_search/index/<?php echo $zone_id;?>" name="myform" >
+				<input type="text" list="loc_list" style="postion:fixed" name="search_top" data-validation="name" />
+					<datalist id="loc_list">
+				<?php 
+					
+					foreach($location_search as $loc_list ){
+						$loc_item = $loc_list['name']; 
+				?>
+					
+						<option value="<?php echo $loc_item; ?>">
+				<?php } ?>
+					</datalist>
+				<br />
+					<?php 
+					
+						foreach($location_search as $loc_list ){
+						$loc_item = $loc_list['name']; 
+				?>
+					
+					<input type="checkbox" name="search_area[]" value="<?php echo $loc_item; ?>" /><?php echo $loc_item; ?><br />
+				<?php } ?>
+			
+		</div>
+				<input type="submit" value="submit" class="refine_box" />
+			</form>
+			
+			
+		<h3 class="refine_title">Price</h3>
+		<div class="ref_area">
+				<input type="checkbox" name="search_price[]" onclick="price_search(1);" />less 10lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(2);" />10 Lacs - 20 Lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(3);" />20 Lacs - 30 Lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(4);" />30 Lacs - 40 Lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(5);" />40 Lacs - 50 Lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(6);" />50 Lacs - 60 Lacs<br />
+				<input type="checkbox" name="search_area[]" onclick="price_search(7);" />60 Lacs - 70 Lacs above<br />
+		</div>
+		<h3 class="refine_title">BHK</h3>
+		<div class="ref_bhk">
+				<input type="checkbox" name="search_area[]" onclick="bhk(1);" />1Bhk<br />
+				<input type="checkbox" name="search_area[]" onclick="bhk(2);" />2Bhk<br />
+				<input type="checkbox" name="search_area[]" onclick="bhk(3);" />3Bhk<br />
+				<input type="checkbox" name="search_area[]" onclick="bhk(4);" />4Bhk<br />
+		</div>
+	  </div>
+	  
+	  <form action="<?=site_url();?>compare_properties" method="post">
+      <input type="hidden" name="i" value="<?php foreach($showproperties as $row){	$i=$row['pid']; echo $i;}?>" />
+      <input type="hidden" name="page" value="zonal_search.php" >
+      <div class="display_msg" style="margin-top:10px; height:30px;">
+            <div style="float:right; margin-right:10px; width: 90px;"><input type="submit" value="Compare"/></div>
+      </div>
+
+	  
+	 
+      <div id="products">
+		<?php
+		if(empty ($showproperties))
 		{
 				echo '<br><br><div class="td">Properties not found for such criteria</div>';
 		}
 		else
-		{	
-          foreach($showproperties as $row){	
-			    $fname=$row['fname'];	
+		{
+			$s=1;
+			foreach($showproperties as $row)
+			{
+				$fname=$row['fname'];	
 				$ptype=$row['ptype'];
-				$s=$row['pid'];
 				$id=$row['pid'];
 				$bhk=$row['bhk'];
 				$tit=$row['tit'];
 				$loc=$row['loc'];
 				$area=$row['area'];
-				 $price=$row['price'];
+				$price=$row['price'];
 				
-
 				$tit=substr($tit, 0, 24-3)."...";
 				$loc=substr($loc, 0, 24-3)."...";
 				
@@ -266,30 +188,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$lc=$loc;
 					$TS=  md5("9223372036854775805: " . date("Y-m-d g:i:s ",  9223372036854775805));
 					echo '<div class="box1">
-						  <div class="img">
-						  <a href="'.site_url().'slide_property/index/'.$id.'">
-						  <img src="'.base_url().'thumbs/'.$fname.'" /></a>
-						  <div class="more"><a href="'.site_url().'slide_property/index/'.$id.'">More details</a></div>
-						  </div>
-						  <div class="list">Property Id : '.$id.'<br>Tittle : '.$tit.'<br />Type : '.$ptype;
-						  if(!empty($bhk))echo'<span class="bhk">('.$bhk.' bhk)</span>';
-						  echo'<br />Location : '.$loc.'<br />Area : '.$area.'<br />Price :Rs '.$price.'</div>
+						  <div class="img">';
+						  
+						  echo '</span><span class="tiit">Rs &nbsp;'.$price.'</span>';
+						  echo '</span><span class="loc">'.$loc.'</span>';
+						  echo'<a href="'.site_url().'slide_property/index/'.$id.'">
+						  <img src="'.base_url().'savefiles/'.$fname.'" width="330px" height="200px" />
+						  </a></div>
+						  <div class="more"><a href="'.site_url().'slide_property/index/'.$id.'">'.$tit.'</a></div>
+						  <div class="list">Property Id : '.$id;
+						  if(!empty($bhk))echo'<span class="bhk">'.$ptype;
+						  echo'<br /></div>
 						  <div>
-							<div class="addcom"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Add to compare</div>
+						  <div class="addcom">
+						  <a  title="add to Wishlist" class="circle_wish" id="wish1'.$id.'" onclick="wish1('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:gray;margin-top: 3px;"></i></a>
+							
+							<a  title="added in Wishlist" class="circle_wish" id="wish'.$id.'" onclick="wish('.$id.','.(isset($_SESSION['id']) ? $_SESSION['id'] : '' ).');">
+							<i class="fa fa-heart" style="font-size:24px;color:green;margin-top: 3px;"></i></a>
+						  
+						  </div>
+						  <div class="addcom" style="margin: 14px;"><input type="checkbox" name="c[]" id="check'.$s.'" value="'.$id.'" onclick="setChecks(this)"> Compare</div>
 							<div class="ints" style="float:right; margin-right:20px;">
-								<a href="#inline_content" class="inline" onclick="setin('.$id.')">I am Interested</a>
+								<a href="#ex1" rel="modal:open" onclick="setin('.$id.')">Contact</a>
 							</div>
+							<ul id="navlist">
+								<li id="home"><a href="default.asp"></a></li>
+								<li id="prev"><a href="css_intro.asp"></a></li>
+								<li id="next"><a href="css_syntax.asp"></a></li>
+							</ul>
+							
+							<div class="" style="float:right; margin-right:20px;    margin-right: 84px;margin-top: -44px;">
+							<div class="dropup">
+							  <button class="dropbtn">share</button>
+							  <div class="dropup-content">
+							<a  target="__blank" 
+							href="https://www.facebook.com/sharer/sharer.php?u='.site_url().'slide_property/index/'.$id.'"
+							class="fb-xfbml-parse-ignore">
+							<img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/facebook-square.svg">
+                            </a>
+						   <a href="https://plus.google.com/share?url='.site_url().'slide_property/index/'.$id.'" onclick="javascript:window.open(this.href,,menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600);return false;">							
+							  <img style="width: 58%;height: 28px;" src="https://use.fontawesome.com/releases/v5.0.10/svgs/brands/google-plus-square.svg">
+							</a>
+							  </div>
+							</div>
+							</div>
+							
+							
 						  </div>
 						  </div>';
 						  $s++;
 				}
+			}
 		}
-		}	
-			
-		
-		 ?>
+
+		?>
       </div>
-        </form>
+	  </form>
+      <nav id="page-nav">
+			<a href="#"></a>
+	  </nav>
   	  
    </div>
    <div class="right"><?php include("pages/ads.php");?></div>
@@ -301,26 +259,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="footer">
 	<?php include("pages/footer.php");?>
 </div> 
-
-		<div style='display:none'>
-			<div id='inline_content' style='padding:10px; background:#fff;'>
-			<form action="<?=site_url();?>interested/custom" method="post" name="myform" id="myform">
-            <div id="set"></div>
+<div style='display:none'>
+			<div id='ex1' class="modal" style='padding:10px; background:#fff;'>
+			<form action="<?=site_url();?>interested/zonal_contact" method="post" name="myform" id="myform">
             <table>
             <tr><td height="20" class="red display_msg" colspan="3"><div id="myform_errorloc" class="error_strings"></div></td></tr>
             <tr><td height="40">Name</td><td></td><td><input type="text" name="name" class="tdbox" ></td></tr>
             <tr><td height="40">Mobile</td><td></td><td><input type="text" name="mobi" class="tdbox"></td></tr>
             <tr><td height="40">Email-id*</td><td></td><td><input type="text" name="eid" class="tdbox" ></td></tr>
-            <tr><td></td><td></td><td height="40"><input type="hidden" name="page" value="custom_search.php" >
-            <input type="hidden" name="i" value="<?php echo $i ?>" >
-			<input type="hidden" name="ptype" value="<?php echo $z1; ?>" >
-			<input type="hidden" name="location" value="<?php echo $z2; ?>" >
-			<input type="hidden" name="type" value="<?php echo $z3; ?>" >
+            <tr><td></td><td><div id="set"></div></td><td height="40"><input type="hidden" name="page" value="custom_search.php" >
+			<input type="hidden" name="zone" value="<?php echo $this->uri->segment(3);?>" >
             <input type="submit" value="Submit" ></td></tr>
             </table>
             </form>	
 		  </div>
-	   </div>
+</div>
+
+
        <script language="JavaScript" type="text/javascript"
     xml:space="preserve">//<![CDATA[
 //You should create the validator only after the definition of the HTML form
@@ -333,5 +288,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   frmvalidator.addValidation("eid","email","Enter a valid email-id");
   
   </script>
+
+<script type="text/javascript" >
+$('a[id^="wish"]').hide();
+$('a[id^="wish1"]').show();
+
+function formClick(){
+	alert(1);
+}
+function _getWishList(){
+	var data='<?php if(isset($wishlist)){foreach($wishlist as $row ){echo $val=$row['p_id'];}}else{echo 'null';}?>';
+	var split_val=data.split("");
+	var len=split_val.length;
+	for(var i=0;i<len;i++){
+		console.log(i);
+		$("#wish1"+split_val[i]).hide();
+		$("#wish"+split_val[i]).show();
+	}
+}
+
+_getWishList();
+
+function wish1(id,user){
+	if(user==null){
+		alert('please login first');
+	}else{
+	var col='g';
+	   $.ajax({
+                method: 'POST',
+				data:{id:id,col:col,user:user},
+                url: '<?=site_url();?>zonal_wishlist/add',
+				success:function(){
+					alert('Property number '+id+' added to wish list');
+					location.reload();
+				}
+            });
+	}
+}
+
+function wish(id,user){
+	console.log(id);
+		if(user==null){
+				alert('please login first');
+			}else{
+			   $.ajax({
+						method: 'POST',
+						data:{id:id,user:user},
+						url: '<?=site_url();?>zonal_wishlist/del',
+						success:function(){
+							alert('Property number '+id+' deleted from wish list');
+							location.reload();
+						}
+					});
+			}
+
+}
+
+function price_search(data){
+	//alert(123);
+	$z1='<?php echo $z1;?>';
+	$z2='<?php echo $z2;?>';
+	$z3='<?php echo $z3;?>';
+	$("#products").load('<?=site_url();?>Custom_search_lakhs/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,ptype:$z1,location:$z2,type:$z3});
+	
+}
+function bhk(data){
+	$z1='<?php echo $z1;?>';
+	$z2='<?php echo $z2;?>';
+	$z3='<?php echo $z3;?>';
+	$("#products").load('<?=site_url();?>Custom_search_bhk/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,ptype:$z1,location:$z2,type:$z3});
+	
+}
+
+
+
+</script>
 </body>
 </html>

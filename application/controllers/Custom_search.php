@@ -8,6 +8,8 @@ class Custom_search extends CI_Controller {
 		$this->load->database();
 		$this->load->model('slider1_mod');
 		$this->load->model('Custom_search_mod');
+		$this->load->model('zonal_search_mod');
+        $this->load->model('Zonal_wishlist_mod');
 
 	}
 	public function index()
@@ -23,9 +25,19 @@ class Custom_search extends CI_Controller {
 	  $data['area_max']= $this->slider1_mod->area_max();
 	  $data['bhk_min']= $this->slider1_mod->bhk_min();
 	  $data['bhk_max']= $this->slider1_mod->bhk_max();
-
-     $this->load->view('custom_search',$data); 
+	  
+	    $i=$this->uri->segment(3);
+	  $data['zone_id']=$i;
+	  if(isset($_SESSION['id'])){
+	  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
+	  }else{
+		 $data['wishlist']=$this->Zonal_wishlist_mod->get_pro('0');  
+	  }
+ 	  //print_r($data);
+	  $data['location_search']=$this->zonal_search_mod->location_search();
+      $this->load->view('custom_search',$data); 
 	}
+	
 	
 	public function show_pro()
 	{ 
