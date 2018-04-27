@@ -1,23 +1,10 @@
-<?php
-/* 	include 'slider.php';
-	$price_min = price_min(); //Get minimum price of product for slider min value
-	$price_max = price_max(); //Get maximum price of product for slide max value
-	$area_min = area_min(); //Get minimum area of product for slider min value
-	$area_max = area_max(); //Get maximum area of product for slide max value
-	$bhk_min = bhk_min(); //Get maximum bhk of product for slide max value
-	$bhk_max = bhk_max(); //Get maximum bhk of product for slide max value
+<?php	
+/*     require_once('accounts/action/jcode.php');
+	$run = new jcode;
+	$run->db_open(); */
 	
-    require_once('accounts/action/jcode.php'); 
-	$i=$_REQUEST['i'];
-	if($i==1)$zone='North Bangalore';
-	if($i==2)$zone='East Bangalore';
-	if($i==3)$zone='South Bangalore';
-	if($i==4)$zone='West Bangalore';
-	if($i==5)$zone='Central Bangalore'; */
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	
 	$zone=$this->uri->segment(3);
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,7 +15,7 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 	    <link type="text/css" rel="stylesheet" href="<?=base_url();?>assets/css/jquery-ui-1.8rc1.custom.css"/>
         <script type="text/javascript" src="<?=base_url();?>assets/js/jquery-ui-1.8rc1.custom.min.js"></script>
-<script>
+   <script>
 	$(window).scroll(function(){
 		
 		var a =$(".refine_search").offset();
@@ -39,8 +26,9 @@
 		$(".refine_search").css('top','136px');
 		}
 	});
-</script>
-		<script type="text/javascript">
+  </script>
+  
+  	<script type="text/javascript">
         <!--
         //initial checkCount of zero
         var checkCount=0
@@ -69,45 +57,45 @@
         }
         //-->
         </script>
+  <script type="text/javascript">setTimeout(function() {$('#loc').fadeOut('slow');}, 2000);</script>
+
 </head>
 <body>
-<?php include('pages/header_1.php')?>
+<?php include('pages/header.php')?>
 <!----- Banner begins -----> 
 <div id="content" class="wrapper">
  <br />
   <div id="property_result" class="left">
     <div class="ptitle">
-		<?php //echo "$zone Properties" ?>
-		<!--<a class="sort" href="<?=site_url();?>zonal_search/index/<?php echo $zone;?>">Sort by</a>
+		<a class="sort" href="<?=site_url();?>zonal_search/index/<?php echo $zone;?>">Sort by</a>
 		<a class="sort" href="<?=site_url();?>zonal_price/index/<?php echo $zone;?>">price</a>
 		<a class="sort" href="<?=site_url();?>zonal_new/index/<?php echo $zone;?>">New</a>
-		<a class="sort">Relevant</a>-->
-		<a class="sort" style="margin-left: 1055px;" href="<?=site_url();?>zonal_wishlist/index">WishList(<font color="red"><?=count($wishlist)?></font>)</a>
+		<a class="sort">Relevant</a>
+		<a class="sort" style="margin-left: 888px;" href="<?=site_url();?>zonal_wishlist/index">wishList(<font color="orange"><?=count($wishlist)?></font>)</a>
 		<input type="button"  onclick="javascript:history.back()"/>
 	</div>
-	
-	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
+
+  	 <div style="float:right; text-align:center; width:1200px;font-size:17px;">
 	  	       <div class="gre" id="h1"><?php echo $this->session->flashdata('we');?></div>
 				<div class="gre" id="h2"><?php echo $this->session->flashdata('server');?></div>
-				<div class="gre"><?php echo $this->session->flashdata('field');?></div>
 	 </div> 
-	  		
-    
-	 <div id="accordion" class="refine_search">
-	  
-		<!--<h3 class="refine_title">Locality</h3>
+	 
+	 
+	  <div id="accordion" class="refine_search">
+	   <span id="loc" style="color:red"><?php echo $this->session->flashdata('loc');?></span>
+		<h3 class="refine_title">Locality</h3>
 		
 		<div class="ref_area">
-			<form method="post" action="<?=site_url();?>location_search/index" name="myform" >
+			<form method="post" action="<?=site_url();?>location_search/index" name="myform">
 			<input type="hidden"  name="custom" value="custom" />
 			<input type="hidden"  name="ptype" value="<?php echo $z1;?>" />
 			<input type="hidden"  name="loc" value="<?php echo $z2;?>" />
 			<input type="hidden"  name="br" value="<?php echo $z3;?>" />
-				<input type="text" list="loc_list" style="postion:fixed" id="myText" name="search_top" data-validation="name" />
+				<input type="text" list="loc_list" name="search_top" />
 					<datalist id="loc_list">
 				<?php 
 					
-					foreach($location_search as $loc_list ){
+				foreach($location_search as $loc_list ){
 						$loc_item = $loc_list['name']; 
 				?>
 					
@@ -117,38 +105,36 @@
 				<br />
 					<?php 
 					
-						foreach($location_search as $loc_list ){
+					foreach($location_search as $loc_list ){
 						$loc_item = $loc_list['name']; 
 				?>
 					
-					<input type="checkbox" name="search_area[]" value="<?php echo $loc_item; ?>" /><?php echo $loc_item; ?><br />
+				<input type="checkbox" name="search_area[]" value="<?php echo $loc_item; ?>" /><?php echo $loc_item; ?><br />
 				<?php } ?>
 			
 		</div>
 				<input type="submit" value="submit" class="refine_box" />
-			</form>-->
-			
-			
+			</form>
 		<h3 class="refine_title">Price</h3>
 		<div class="ref_area">
-				<input type="checkbox" name="search_price[]" onclick="price_search(1);" />less 10lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(2);" />10 Lacs - 20 Lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(3);" />20 Lacs - 30 Lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(4);" />30 Lacs - 40 Lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(5);" />40 Lacs - 50 Lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(6);" />50 Lacs - 60 Lacs<br />
-				<input type="checkbox" name="search_area[]" onclick="price_search(7);" />60 Lacs - 70 Lacs above<br />
+			<input type="checkbox" name="search_price[]" onclick="price_search(1);" />less 10lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(2);" />10 Lacs - 20 Lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(3);" />20 Lacs - 30 Lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(4);" />30 Lacs - 40 Lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(5);" />40 Lacs - 50 Lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(6);" />50 Lacs - 60 Lacs<br />
+			<input type="checkbox" name="search_area[]" onclick="price_search(7);" />60 Lacs - 70 Lacs<br />
 		</div>
 		<h3 class="refine_title">BHK</h3>
 		<div class="ref_bhk">
-				<input type="checkbox" name="search_area[]" onclick="bhk(1);" />1Bhk<br />
-				<input type="checkbox" name="search_area[]" onclick="bhk(2);" />2Bhk<br />
-				<input type="checkbox" name="search_area[]" onclick="bhk(3);" />3Bhk<br />
-				<input type="checkbox" name="search_area[]" onclick="bhk(4);" />4Bhk<br />
+			<input type="checkbox" name="search_area[]" onclick="bhk(1);" />1Bhk<br />
+			<input type="checkbox" name="search_area[]" onclick="bhk(2);" />2Bhk<br />
+			<input type="checkbox" name="search_area[]" onclick="bhk(3);" />3Bhk<br />
+			<input type="checkbox" name="search_area[]" onclick="bhk(4);" />4Bhk<br />
 		</div>
 	  </div>
 	  
-	  <form action="<?=site_url();?>compare_properties" method="post">
+	   <form action="<?=site_url();?>compare_properties" method="post">
       <input type="hidden" name="i" value="<?php foreach($showproperties as $row){	$i=$row['pid']; echo $i;}?>" />
       <input type="hidden" name="page" value="zonal_search.php" >
       <div class="display_msg" style="margin-top:10px; height:30px;">
@@ -156,17 +142,17 @@
       </div>
 
 	  
-	 
       <div id="products">
-		<?php
-		if(empty ($showproperties))
+	  	<?php 
+
+		if(empty ($show_location))
 		{
 				echo '<br><br><div class="td">Properties not found for such criteria</div>';
 		}
 		else
-		{
+		{						
 			$s=1;
-			foreach($showproperties as $row)
+			foreach($show_location as $row)
 			{
 				$fname=$row['fname'];	
 				$ptype=$row['ptype'];
@@ -195,7 +181,7 @@
 					echo '<div class="box1">
 						  <div class="img">';
 						  
-						  echo '</span><span class="tiit">Rs &nbsp;'.$price.'</span>';
+						  echo '</span><span class="tiit">'.$price.'</span>';
 						  echo '</span><span class="loc">'.$loc.'</span>';
 						  echo'<a href="'.site_url().'slide_property/index/'.$id.'">
 						  <img src="'.base_url().'savefiles/'.$fname.'" width="330px" height="200px" />
@@ -246,13 +232,9 @@
 				}
 			}
 		}
-
 		?>
       </div>
-	  </form>
-      <nav id="page-nav">
-			<a href="#"></a>
-	  </nav>
+        </form>
   	  
    </div>
    <div class="right"><?php include("pages/ads.php");?></div>
@@ -264,7 +246,7 @@
 <div id="footer">
 	<?php include("pages/footer.php");?>
 </div> 
-<div style='display:none'>
+	<div style='display:none'>
 			<div id='ex1' class="modal" style='padding:10px; background:#fff;'>
 			<form action="<?=site_url();?>interested/zonal_contact" method="post" name="myform" id="myform">
             <table>
@@ -278,11 +260,9 @@
             </table>
             </form>	
 		  </div>
-</div>
-
-
-       <script language="JavaScript" type="text/javascript"
-    xml:space="preserve">//<![CDATA[
+	   </div>
+<script language="JavaScript" type="text/javascript"
+xml:space="preserve">//<![CDATA[
 //You should create the validator only after the definition of the HTML form
   var frmvalidator  = new Validator("myform");
  frmvalidator.EnableOnPageErrorDisplaySingleBox();
@@ -292,12 +272,16 @@
   frmvalidator.addValidation("eid","req","Email-id is required");
   frmvalidator.addValidation("eid","email","Enter a valid email-id");
   
-  </script>
-
+</script>
+<script language="JavaScript" type="text/javascript" xml:space="preserve">//<![CDATA[
+//You should create the validator only after the definition of the HTML form
+  var frmvalidator  = new Validator("myform");
+  frmvalidator.addValidation("ptype","dontselect=0","Please select the property type");
+  
+//]]></script>
 <script type="text/javascript" >
 $('a[id^="wish"]').hide();
 $('a[id^="wish1"]').show();
-
 function formClick(){
 	alert(1);
 }
@@ -349,24 +333,23 @@ function wish(id,user){
 
 }
 
+
+
 function price_search(data){
 	//alert(123);
-	$z1='<?php echo $z1;?>';
-	$z2='<?php echo $z2;?>';
-	$z3='<?php echo $z3;?>';
-	$("#products").load('<?=site_url();?>Custom_search_lakhs/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,ptype:$z1,location:$z2,type:$z3});
+	$z1='<?php foreach($show_location as $row) $location=$row['loc']; echo $location;?>';
+	//$z1='<?php echo $zone_id;?>';
+	//alert($z1);
+	$("#products").load('<?=site_url();?>lakhs_loc/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,zone:$z1});
 	
 }
 function bhk(data){
-	$z1='<?php echo $z1;?>';
-	$z2='<?php echo $z2;?>';
-	$z3='<?php echo $z3;?>';
-	$("#products").load('<?=site_url();?>Custom_search_bhk/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,ptype:$z1,location:$z2,type:$z3});
+	$z2='<?php foreach($show_location as $row) $location=$row['loc']; echo $location; ?>';
+	//$z2='<?php echo $zone_id;?>';
+	//alert($z2);
+	$("#products").load('<?=site_url();?>bhk_loc/index',{i:<?php foreach($showproperties as $row)  $i=$row['pid']; echo $i; ?>,am:data,zone:$z2});
 	
 }
-
-
-
 </script>
 </body>
 </html>

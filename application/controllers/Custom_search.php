@@ -14,11 +14,26 @@ class Custom_search extends CI_Controller {
 	}
 	public function index()
 	{
+	   $z1u=$this->uri->segment(3);
+	   $z2u=urldecode($this->uri->segment(4));
+	   $z3u=$this->uri->segment(5);
+	  
+	  if($z1u && $z2u || $z3u){
+	  $z1=$this->uri->segment(3);
+	  $z2=urldecode($this->uri->segment(4));
+	  $z3=$this->uri->segment(5);
+	  }else{
+	  $z1= $this->input->post('ptype');
+	  $z2=$this->input->post('location');
+	  $z3=$this->input->post('type');
+	  }
+		
  	  $data['z1']=$this->input->post('ptype');
       $data['z2']=$this->input->post('location');
 	  $data['z3']=$this->input->post('type');
-      $data['showproperties']=$this->Custom_search_mod->cus_search();
-//print_r($data1); 	  
+	  
+      $data['showproperties']=$this->Custom_search_mod->cus_search($z1,$z2,$z3);
+	  
 	  $data['price_min']=$this->slider1_mod->price_min();
 	  $data['price_max']= $this->slider1_mod->price_max();
 	  $data['area_min']= $this->slider1_mod->area_min();
@@ -27,7 +42,6 @@ class Custom_search extends CI_Controller {
 	  $data['bhk_max']= $this->slider1_mod->bhk_max();
 	  
 	    $i=$this->uri->segment(3);
-	  $data['zone_id']=$i;
 	  if(isset($_SESSION['id'])){
 	  $data['wishlist']=$this->Zonal_wishlist_mod->get_pro($_SESSION['id']); 
 	  }else{
