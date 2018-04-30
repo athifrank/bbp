@@ -37,6 +37,7 @@ class Zonal_wishlist_mod extends CI_model {
 	  $this->db->query($sql);
   }
   
+ 
 
 
   
